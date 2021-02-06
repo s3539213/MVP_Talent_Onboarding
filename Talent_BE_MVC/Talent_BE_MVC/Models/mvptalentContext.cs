@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Talent_BE_MVC.Models
 {
-    public partial class mvp_talentContext : DbContext
+    public partial class mvptalentContext : DbContext
     {
-        public mvp_talentContext()
+        public mvptalentContext()
         {
         }
 
-        public mvp_talentContext(DbContextOptions<mvp_talentContext> options)
+        public mvptalentContext(DbContextOptions<mvptalentContext> options)
             : base(options)
         {
         }
@@ -19,6 +19,15 @@ namespace Talent_BE_MVC.Models
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Store> Store { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-CEINO38;Database=mvptalent;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

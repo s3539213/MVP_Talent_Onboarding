@@ -26,7 +26,7 @@ namespace Talent_BE_MVC
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("SqlDatabase");
-            services.AddDbContext<mvp_talentContext>(options => options.UseSqlServer(connection));
+          services.AddDbContext<mvptalentContext>(options => options.UseSqlServer(connection));
 
             services.AddControllersWithViews();
         }
