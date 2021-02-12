@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-export class Customer extends Component {
-  static displayName = Customer.name;
+export class Sales extends Component {
+  static displayName = Sales.name;
 
   render () {
     return (
       <div>
-        <h1>Customer</h1>
+        <h1>Sales</h1>
         <p>Welcome to your new single-page application, built with:</p>
         <ul>
           <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>

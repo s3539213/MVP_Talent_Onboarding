@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
+
+import Sematic_NavBar from './Sematic_NavBar';
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -8,7 +9,7 @@ export class Layout extends Component {
   render () {
     return (
       <div>
-        <NavMenu />
+        <Sematic_NavBar />
         <Container>
           {this.props.children}
         </Container>
