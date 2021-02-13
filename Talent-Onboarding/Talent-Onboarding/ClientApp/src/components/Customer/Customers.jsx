@@ -3,7 +3,7 @@ import {Button} from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal'
 import PaginationCust from '../PaginationsCust'
 import axios from 'axios';
-import CustomerContent from './CustomersContent';
+import CustomersContent from './CustomersContent';
 
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
@@ -43,7 +43,7 @@ const Customer = () => {
       <Button color = 'blue' onClick={toggleModal}>New Customer</Button>
         <br></br>
 
-      <CustomerContent customers={currentCustomers} loading={loading} fetchData={fetchData} />
+      <CustomersContent customers={currentCustomers} loading={loading} fetchData={fetchData} />
       <PaginationCust 
         itemsPerPage={customersPerPage}
         totalitems={customers.length}

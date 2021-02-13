@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import { Button, Header, Image, Modal, Form, Table, Menu, Icon } from 'semantic-ui-react'
+import React, { useState} from 'react'
+import { Button,Table,} from 'semantic-ui-react'
 import EditCustomerModal from './EditCustomerModal'
 import DeleteCustomerModal from './DeleteCustomerModal'
 
-import axios from 'axios'
-
-
-const CustomerContent = (props) => {
+const CustomersContent = (props) => {
 const {customers, loading, fetchData} = props;
 const [openEditModal, setOpenEditModal] = useState(false);
 const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -26,8 +23,6 @@ const toggleDelete = () =>{
   //console.log("modal: " + openCreateModal)
 }
 
-
-
 const fetchCustomers = async (id, cname, caddress) => {
   console.log("edit")
   setcid(id)
@@ -43,13 +38,6 @@ const deleteCustomer = (id) =>{
   toggleDelete()
 }
 
-// const fetchCustomer = async () => {
-//   setLoading(true);
-//   const res = await axios.get('/Customers/GetCustomer');
-//   setCustomers(res.data);
-//   setLoading(false);
-  
-// };
 
     if(loading){
         return <h2>Loading...</h2>;
@@ -100,4 +88,4 @@ const deleteCustomer = (id) =>{
     );
 }
 
-export default CustomerContent;
+export default CustomersContent;

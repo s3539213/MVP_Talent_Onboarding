@@ -10,8 +10,6 @@ const {open, toggleEdit, cid, cname, caddress,fetchData } = props;
 const [newName, setNewName] = useState();
 const [inputName, setInputName] = useState();
 const [inputAddress, setInputAddress] = useState(caddress);
-//const [custId, setCustId] = useState(id);
-const [address, setAddress] = useState(caddress);
 const [newAddress, setNewAddress] = useState();
 
 const editCustomer = (id) => {

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Modal, Form } from 'semantic-ui-react'
+import { Button, Modal, Form, Label, Input } from 'semantic-ui-react'
 import axios from 'axios'
 
 
 
-const NewCustomerModal = (props) => {
+const NewProductModal = (props) => {
 const { open, toggleModal, fetchData } = props;
 const [name, setname] = useState();
-const [address, setaddress] = useState();
+const [price, setPrice] = useState();
 
   useEffect(() => {
     console.log(name)
@@ -18,15 +18,15 @@ const [address, setaddress] = useState();
     console.log(e.target.value);
   }
 
-  const createCustomer = () => {
-    if(!name || !address){
+  const createProduct = () => {
+    if(!name || !price){
       alert ("Please complete all fields")
     }
     else{
       axios
-      .post('/Customers/PostCustomer', {
+      .post('/Products/PostProduct', {
         name: name,
-        address: address,
+        price: price,
       })
       .then((res) => {
         console.log(res);
@@ -42,16 +42,19 @@ const [address, setaddress] = useState();
     <Modal
       open={open}
     >
-      <Modal.Header>Create New Customer</Modal.Header>
+      <Modal.Header>Create New Product</Modal.Header>
       <Modal.Content>
           <Form>
             <Form.Field>
               <label>Name</label>
-              <input placeholder='Frank Sinatra' onBlur={(e) => setname(e.target.value) }/>
+              <input placeholder='Potatoes' onBlur={(e) => setname(e.target.value) }/>
             </Form.Field>
             <Form.Field>
-              <label>Address</label>
-              <input placeholder='12 Derby Rd, Frankston North, VIC, 3200'  onBlur={(e) => setaddress(e.target.value) } />
+            <Input labelPosition='right' type='text' placeholder='Amount'onBlur={(e) => setPrice(e.target.value)}>
+              <Label basic>$</Label>
+              <input />
+              <Label></Label>
+            </Input>
             </Form.Field>
         </Form> 
       </Modal.Content>
@@ -60,10 +63,10 @@ const [address, setaddress] = useState();
           Cancel
         </Button>
         <Button
-          content="Create New Customer"
+          content="Create New Product"
           labelPosition='right'
           icon='checkmark'
-          onClick={() => createCustomer()}
+          onClick={() => createProduct()}
           positive
         />
       </Modal.Actions>
@@ -71,4 +74,4 @@ const [address, setaddress] = useState();
   )
 }
 
-export default NewCustomerModal;
+export default NewProductModal;
