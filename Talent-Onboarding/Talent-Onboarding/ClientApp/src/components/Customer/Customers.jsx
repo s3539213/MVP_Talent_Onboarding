@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Icon, Menu, Table, Button} from 'semantic-ui-react'
+import React, { useEffect, useState } from 'react';
+import {Button} from 'semantic-ui-react'
 import NewCustomerModal from './NewCustomerModal'
 import PaginationCust from '../PaginationsCust'
 import axios from 'axios';
@@ -9,22 +9,25 @@ const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [customersPerPage] = useState(2);
+  const [customersPerPage] = useState(10);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   
-  console.log(loading)
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const res = await axios.get('/Customers/GetCustomer');
-
-      setCustomers(res.data);
-      setLoading(false);
-      
-    };
     fetchData();
   }, []);
 
-  console.log(loading)
+  const toggleModal = () =>{
+    setOpenCreateModal(!openCreateModal)
+    //console.log("modal: " + openCreateModal)
+  }
+
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await axios.get('/Customers/GetCustomer');
+    setCustomers(res.data);
+    setLoading(false);
+    
+  };
   // Get current posts
   const indexOfLastCustomer = currentPage * customersPerPage;
   const indexOfFirstCustomer = indexOfLastCustomer - customersPerPage;
@@ -35,8 +38,12 @@ const Customer = () => {
   // console.log(customers)
   return (
     <div className='container mt-5'>
-      
-      <CustomerContent customers={currentCustomers} loading={loading} />
+      <NewCustomerModal open={openCreateModal} toggleModal={toggleModal} fetchData={fetchData}/>
+      <h1>Customer</h1>
+      <Button color = 'blue' onClick={toggleModal}>New Customer</Button>
+        <br></br>
+
+      <CustomerContent customers={currentCustomers} loading={loading} fetchData={fetchData} />
       <PaginationCust 
         itemsPerPage={customersPerPage}
         totalitems={customers.length}

@@ -1,13 +1,55 @@
 import React, {useEffect, useState} from 'react'
 import { Button, Header, Image, Modal, Form, Table, Menu, Icon } from 'semantic-ui-react'
-import NewCustomerModal from './NewCustomerModal'
+import EditCustomerModal from './EditCustomerModal'
+import DeleteCustomerModal from './DeleteCustomerModal'
 
 import axios from 'axios'
 
 
-const CustomerContent = ({customers, loading}) => {
-const toggleModal = () =>{}
-const deleteCustomer = (id) =>{}
+const CustomerContent = (props) => {
+const {customers, loading, fetchData} = props;
+const [openEditModal, setOpenEditModal] = useState(false);
+const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+const [cid, setcid] = useState([])
+const [cname, setcname] = useState([])
+const [caddress, setcaddress] = useState([])
+
+
+const toggleEdit = () =>{
+  setOpenEditModal(!openEditModal)
+  //console.log("modal: " + openCreateModal)
+}
+
+const toggleDelete = () =>{
+  setOpenDeleteModal(!openDeleteModal)
+  //console.log("modal: " + openCreateModal)
+}
+
+
+
+const fetchCustomers = async (id, cname, caddress) => {
+  console.log("edit")
+  setcid(id)
+  setcname(cname)
+  setcaddress(caddress)
+  toggleEdit()
+  
+}
+
+const deleteCustomer = (id) =>{
+  console.log("delete")
+  setcid(id)
+  toggleDelete()
+}
+
+// const fetchCustomer = async () => {
+//   setLoading(true);
+//   const res = await axios.get('/Customers/GetCustomer');
+//   setCustomers(res.data);
+//   setLoading(false);
+  
+// };
 
     if(loading){
         return <h2>Loading...</h2>;
@@ -15,10 +57,6 @@ const deleteCustomer = (id) =>{}
     
     return(
         <div>
-        {/* <NewCustomerModal open={openCreateModal} toggleModal={toggleModal()} fetchData={this.fetchData}/> */}
-        <h1>Customer</h1>
-        <Button color = 'blue' onClick={toggleModal()}>New Customer</Button>
-        <br></br>
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -36,8 +74,11 @@ const deleteCustomer = (id) =>{}
               <Table.Cell>{c.name}</Table.Cell>
               <Table.Cell>{c.address}</Table.Cell>
               <Table.Cell>
-              <Button color = 'yellow'>Edit</Button>
+              
+              <Button color = 'yellow' onClick={() => fetchCustomers(c.id, c.name, c.address)}>Edit</Button>
+              <EditCustomerModal open={openEditModal} toggleEdit={toggleEdit} cid={cid} cname={cname} caddress={caddress} fetchData={fetchData}/>
               <Button color = 'red' onClick={() => deleteCustomer(c.id)}>Delete</Button>
+              <DeleteCustomerModal open={openDeleteModal} toggleDelete={toggleDelete} cid={cid} fetchData={fetchData}/>
               </Table.Cell>
               
               

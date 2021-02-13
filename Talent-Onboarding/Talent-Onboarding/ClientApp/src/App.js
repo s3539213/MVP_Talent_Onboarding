@@ -10,6 +10,8 @@ import Customer from './components/Customer/Customers';
 import { Product } from './components/Products/Products';
 import { Store } from './components/Stores/Stores';
 import { Sales } from './components/Sales/Sales';
+
+import Test from './test';
 import './custom.css'
 
 export default class App extends Component {
@@ -26,6 +28,8 @@ export default class App extends Component {
         <Route path='/stores' component={Store}/>
         <Route path='/sales' component={Sales}/>
         <Route path='/fetch-data' component={FetchData} />
+        
+        <Route path='/test' component={Test} />
       </Layout>
     );
   }
