@@ -1,8 +1,9 @@
 import React from 'react';
 import { Pagination } from 'semantic-ui-react';
 
-const PaginationCust = ({ itemsPerPage, totalitems, paginate }) => {
+const CstmPagination = ({ itemsPerPage, totalitems, paginate, type  }) => {
   const pageNumbers = [];
+  
 
   for (let i = 1; i <= Math.ceil(totalitems / itemsPerPage); i++) {
     pageNumbers.push(i);
@@ -11,6 +12,15 @@ const PaginationCust = ({ itemsPerPage, totalitems, paginate }) => {
    const onChange = (e, ) =>{
 
 
+  }
+  const getHrefType = () => {
+    let hrefType = "";
+    if(type == "Customers"){hrefType = "./Customers/!#";}
+    else if (type == "Products"){hrefType = "./Products/!#";}
+    else if (type == "Stores"){hrefType = "./Stores/!#";}
+    else if (type == "Sales"){hrefType = "./Sales/!#";}
+    else {}
+    return hrefType
   }
 
   return (
@@ -33,7 +43,7 @@ const PaginationCust = ({ itemsPerPage, totalitems, paginate }) => {
       <ul className='pagination' >
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='/customers/!#' className='page-link'>
+            <a onClick={() => paginate(number)} href={getHrefType} className='page-link'>
               {number}
             </a>
           </li>
@@ -43,4 +53,4 @@ const PaginationCust = ({ itemsPerPage, totalitems, paginate }) => {
   )
 }
 
-export default PaginationCust;
+export default CstmPagination;

@@ -11,9 +11,10 @@ const Test = () => {
     },[])
 
     const fetchData = async () => {
-       
-        const res = await  axios.get('/Products/GetProduct/1');
-        console.log(res.data);
+
+        let link  = `/Products/GetProduct/1`
+        const res = await  axios.get(link);
+        console.log(res.data.name);
         setProd(res.data);
         
       };

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import { Button, Modal, Form, Label, Input } from 'semantic-ui-react'
+import NumberFormat from 'react-number-format'
 import axios from 'axios'
 
 
 
 const NewProductModal = (props) => {
 const { open, toggleModal, fetchData } = props;
-const [name, setname] = useState();
+const [name, setName] = useState();
 const [price, setPrice] = useState();
 
   useEffect(() => {
@@ -17,6 +18,14 @@ const [price, setPrice] = useState();
   const test = (e)=>{
     console.log(e.target.value);
   }
+
+  const setNewName = (e) =>{
+    setName(e.target.value)
+  }
+  const setNewPrice = (e) =>{
+    setPrice(e.target.value)
+  }
+
 
   const createProduct = () => {
     if(!name || !price){
@@ -47,12 +56,12 @@ const [price, setPrice] = useState();
           <Form>
             <Form.Field>
               <label>Name</label>
-              <input placeholder='Potatoes' onBlur={(e) => setname(e.target.value) }/>
+              <Input placeholder="Potatoes" onChange ={test} onBlur={setNewName}/>
             </Form.Field>
             <Form.Field>
-            <Input labelPosition='right' type='text' placeholder='Amount'onBlur={(e) => setPrice(e.target.value)}>
+            <Input labelPosition='right' type='text' placeholder='Amount'>
               <Label basic>$</Label>
-              <input />
+              <NumberFormat thousandSeparator={true} decimalSeparators={true} decimalScale={2} fixedDecimalScale={true} onChange ={test} onBlur={setNewPrice}/>
               <Label></Label>
             </Input>
             </Form.Field>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {Button} from 'semantic-ui-react'
-import PaginationCust from '../PaginationsCust'
+import axios from 'axios';
+
+import CstmPagination from '../CstmPaginations'
 import NewProductModal from './NewProductModal'
 import ProductsContent from './ProductsContent'
-import axios from 'axios';
+
 
 
 const Product = () => {
@@ -44,12 +46,8 @@ const Product = () => {
       <Button color = 'blue' onClick={toggleModal}>New Product</Button>
         <br></br>
 
-      <ProductsContent products={currentProducts} loading={loading} fetchData={fetchData} />
-      <PaginationCust 
-        itemsPerPage={productsPerPage}
-        totalitems={products.length}
-        paginate={paginate}
-      /> 
+      <ProductsContent products={currentProducts} loading={loading} fetchData={fetchData} type={"Products"} />
+      <CstmPagination itemsPerPage={productsPerPage} totalitems={products.length} paginate={paginate} type={"Products"} /> 
     </div>
   );
 };

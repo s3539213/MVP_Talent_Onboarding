@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {Button} from 'semantic-ui-react'
-import NewCustomerModal from './NewCustomerModal'
-import PaginationCust from '../PaginationsCust'
 import axios from 'axios';
+
+import CstmPagination from '../CstmPaginations'
+import NewCustomerModal from './NewCustomerModal'
 import CustomersContent from './CustomersContent';
 
 const Customer = () => {
@@ -44,11 +45,7 @@ const Customer = () => {
         <br></br>
 
       <CustomersContent customers={currentCustomers} loading={loading} fetchData={fetchData} />
-      <PaginationCust 
-        itemsPerPage={customersPerPage}
-        totalitems={customers.length}
-        paginate={paginate}
-      /> 
+      <CstmPagination itemsPerPage={customersPerPage} totalitems={customers.length} paginate={paginate} type={"Customers"} /> 
     </div>
   );
 };

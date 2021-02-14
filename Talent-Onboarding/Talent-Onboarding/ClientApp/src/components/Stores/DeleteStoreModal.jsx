@@ -33,7 +33,7 @@ const deleteStore = () =>{
     >
       <Modal.Header>Delete Store</Modal.Header>
       <Modal.Content>
-        <p>Are you sure?</p>
+        <h3>Are you sure?</h3>
       </Modal.Content>
       <Modal.Actions>
         <Button color='black' onClick={() => toggleDelete()}>

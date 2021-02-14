@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Button, Table, } from 'semantic-ui-react'
 import NumberFormat from 'react-number-format'
 import EditProductModal from './EditProductModal'
+// import DeleteModal from '../DeleteModal'
 import DeleteProductModal from './DeleteProductModal'
 
 import axios from 'axios'
@@ -36,9 +37,10 @@ const fetchProducts = async (id, pname, pprice) => {
   
 }
 
-const deleteProduct = (id) =>{
+const deleteProduct = (id, name) =>{
   console.log("delete")
   setpid(id)
+  setpname(name)
   toggleDelete()
 }
 
@@ -69,7 +71,8 @@ const deleteProduct = (id) =>{
               
               <Button color = 'yellow' onClick={() => fetchProducts(p.id, p.name, p.price)}>Edit</Button>
               <EditProductModal open={openEditModal} toggleEdit={toggleEdit} pid={pid} pname={pname} pprice={pprice} fetchData={fetchData}/>
-              <Button color = 'red' onClick={() => deleteProduct(p.id)}>Delete</Button>
+              <Button color = 'red' onClick={() => deleteProduct(p.id, p.name)}>Delete</Button>
+              {/* <DeleteModal open={openDeleteModal} toggleDelete={toggleDelete} id={pid} fetchData={fetchData} type={"Products"} name={pname}/> */}
               <DeleteProductModal open={openDeleteModal} toggleDelete={toggleDelete} pid={pid} fetchData={fetchData}/>
               </Table.Cell>
               

@@ -33,7 +33,7 @@ const deleteCustomer = (id) =>{
     >
       <Modal.Header>Delete Customer</Modal.Header>
       <Modal.Content>
-        <p>Are you sure?</p>
+        <h3>Are you sure?</h3>
       </Modal.Content>
       <Modal.Actions>
         <Button color='black' onClick={() => toggleDelete()}>
