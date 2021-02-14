@@ -1,26 +1,57 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import {Button} from 'semantic-ui-react'
+import PaginationCust from '../PaginationsCust'
+import NewStoreModal from './NewStoreModal'
+import StoresContent from './StoresContent'
+import axios from 'axios';
 
-export class Store extends Component {
-  static displayName = Store.name;
 
-  render () {
-    return (
-      <div>
-        <h1>Stores</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
-    );
+const Stores = () => {
+  const [stores, setStores] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [storesPerPage] = useState(10);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const toggleModal = () =>{
+    setOpenCreateModal(!openCreateModal)
+    //console.log("modal: " + openCreateModal)
   }
-}
+
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await axios.get('/Stores/GetStore');
+    setStores(res.data);
+    setLoading(false);
+    
+  };
+  // Get current posts
+  const indexOfLastStore = currentPage * storesPerPage;
+  const indexOfFirstStore = indexOfLastStore - storesPerPage;
+  const currentStores = stores.slice(indexOfFirstStore, indexOfLastStore);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  // console.log(stores)
+  return (
+    <div className='container mt-5'>
+      <NewStoreModal open={openCreateModal} toggleModal={toggleModal} fetchData={fetchData}/>
+      <h1>Stores</h1>
+      <Button color = 'blue' onClick={toggleModal}>New Store</Button>
+        <br></br>
+
+      <StoresContent stores={currentStores} loading={loading} fetchData={fetchData} />
+      <PaginationCust 
+        itemsPerPage={storesPerPage}
+        totalitems={stores.length}
+        paginate={paginate}
+      /> 
+    </div>
+  );
+};
+
+export default Stores;

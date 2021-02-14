@@ -9,7 +9,7 @@ import { Counter } from './components/Counter';
 import Customer from './components/Customer/Customers';
 //import { ProductCopy } from './components/Products/ProductsCopy';
 import  Product  from './components/Products/Products';
-import { Store } from './components/Stores/Stores';
+import  Store  from './components/Stores/Stores';
 import { Sales } from './components/Sales/Sales';
 
 import Test from './test';

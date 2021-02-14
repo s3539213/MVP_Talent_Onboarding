@@ -4,27 +4,36 @@ import axios from 'axios'
 //import { FetchData } from '../FetchData';
 
 
-const EditCustomerModal = (props) => {
-const {open, toggleEdit, cid, cname, caddress,fetchData } = props;
+const EditStoreModal = (props) => {
+const {open, toggleEdit, stid, stname, staddress,fetchData } = props;
 
 const [newName, setNewName] = useState();
-const [inputName, setInputName] = useState();
-const [inputAddress, setInputAddress] = useState(caddress);
+// const [inputName, setInputName] = useState();
+// const [inputAddress, setInputAddress] = useState(staddress);
 const [newAddress, setNewAddress] = useState();
+ 
 
-const editCustomer = (id) => {
+useEffect(() => {
+    
+  }, [])
 
-console.log(inputName + " " + inputAddress)
-  if(!inputName || !inputAddress){
+
+const test = (e) =>{console.log(e.target.value);}
+const setName = (e) =>{setNewName(e.target.value)}
+const setAddress = (e) =>{setNewAddress(e.target.value)}
+
+ 
+const editStore = () => {
+
+//console.log(inputName + " " + inputAddress)
+  if(!newName || !newAddress){
     alert ("Please complete all fields")
   }
   else{
-    setNewName(inputName)
-    setNewAddress(inputAddress)
     console.log(newName + " " + newAddress)
     axios
-      .put(`/Customers/PutCustomer/${id}`, {
-        id: id,
+      .put(`/Stores/PutStore/${stid}`, {
+        id: stid,
         name: newName,
         address: newAddress,
       })
@@ -39,25 +48,23 @@ console.log(inputName + " " + inputAddress)
   }
 
 }
-  useEffect(() => {
-    
-  }, [])
+
 
  
   return (
     <Modal
       open={open}
     >
-      <Modal.Header>Edit Customer</Modal.Header>
+      <Modal.Header>Edit Store</Modal.Header>
       <Modal.Content>
           <Form>
             <Form.Field>
               <label>Name</label>
-              <input defaultValue={cname} onChange ={(e) => setInputName(e.target.value)} onBlur={(e) => setNewName(e.target.value) }/>
+              <input defaultValue={stname} onChange ={test} onBlur={setName}/>
             </Form.Field>
             <Form.Field>
               <label>Address</label>
-              <input defaultValue={caddress} onChange ={(e) => setInputAddress(e.target.value)} onBlur={(e) => setNewAddress(e.target.value) } />
+              <input defaultValue={staddress} onChange ={test} onBlur={setAddress} />
             </Form.Field>
         </Form> 
       </Modal.Content>
@@ -66,10 +73,10 @@ console.log(inputName + " " + inputAddress)
           Cancel
         </Button>
         <Button
-          content="Edit Customer"
+          content="Edit Store"
           labelPosition='right'
           icon='checkmark'
-          onClick={() => editCustomer(cid)}
+          onClick={() => editStore()}
           positive
         />
       </Modal.Actions>
@@ -77,4 +84,4 @@ console.log(inputName + " " + inputAddress)
   )
 }
 
-export default EditCustomerModal;
+export default EditStoreModal;
