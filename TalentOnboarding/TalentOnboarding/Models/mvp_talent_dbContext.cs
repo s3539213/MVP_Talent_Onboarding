@@ -24,14 +24,14 @@ namespace TalentOnboarding.Models
         public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Stores> Stores { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=mvp-talent-svr.database.windows.net;Database=mvp_talent_db;User Id=bmiggi;Password=Contact24110");
-            }
-        }
+//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//         {
+//             if (!optionsBuilder.IsConfigured)
+//             {
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                 optionsBuilder.UseSqlServer("Server=mvp-talent-svr.database.windows.net;Database=mvp_talent_db;User Id=bmiggi;Password=Alpha1234");
+//             }
+//         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
