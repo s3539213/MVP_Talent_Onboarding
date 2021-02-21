@@ -3,14 +3,14 @@ import {Button} from 'semantic-ui-react'
 import axios from 'axios';
 
 import CstmPagination from '../CstmPaginations'
-// import NewSalesModal from './NewSalesModal'
+import NewSalesModal from './NewSalesModal'
 import SalesContent from './SalesContent'
 
 
 
 const Sales = () => {
   const [sales, setSales] = useState([]);
-  const [compSales, setCompSales]= useState({id: null, cust:null, prod: null,store: null, date:null})
+  
   const [customers, setCustomers] = useState([]);
   const [products, setProducts] = useState([]);
   const [stores, setStores] = useState([]);
@@ -43,20 +43,7 @@ const Sales = () => {
     setProducts(resProd.data);
     // console.log("products: " + products)
     setStores(resSt.data);
-    // console.log("stores: " + stores)
-
-    // sales.map((s) =>{
-    //   let custName ='', prod='', store='';
-    //   customers.filter(customer => customer.id === s.customerid).map(c => {custName = c;})
-    //   products.filter(product => product.id === s.productid).map(p => {prod = p})
-    //   stores.filter(store => store.id === s.storeid).map(st => {store = st})
-
-    //   setCompSales(...setCompSales, {id: s.id, cust:custName, prod:prod, store:store, date: s.datesold})
-    //   console.log(compSales)
-
-    // })
-    // console.log("compSales: " + compSales)
-
+   
     setLoading(false);
     console.log("loading: " + loading)
     
@@ -71,7 +58,7 @@ const Sales = () => {
   // console.log(Sales)
   return (
     <div className='container mt-5'>
-      {/* <NewSalesModal open={openCreateModal} toggleModal={toggleModal} fetchData={fetchData}/> */}
+      <NewSalesModal open={openCreateModal} customers={customers} products={products} stores={stores} toggleModal={toggleModal} fetchData={fetchData}/>
       <h1>Sales</h1>
       <Button color = 'blue' onClick={toggleModal}>New Sales</Button>
         <br></br>

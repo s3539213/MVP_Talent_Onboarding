@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
 import { Button,Table,} from 'semantic-ui-react'
+import NumberFormat from 'react-number-format'
 // import EditStoreModal from './EditStoreModal'
 // import DeleteStoreModal from './DeleteStoreModal'
 
@@ -71,6 +72,12 @@ const deleteSales = (id) =>{
   toggleDelete()
 }
 
+const dateFormat = (date) =>{
+  const fdate = new Date(date)
+  return `${fdate.getDate()}-${fdate.getMonth()+1}-${fdate.getFullYear()}`
+
+}
+
 
     if(loading){
         return <h2>Loading...</h2>;
@@ -99,7 +106,7 @@ const deleteSales = (id) =>{
               <Table.Cell>{getCustName(s.customerid)}</Table.Cell>
               <Table.Cell>{getProd(s.productid)}</Table.Cell>
               <Table.Cell>{getStore(s.storeid)}</Table.Cell>
-              <Table.Cell>{s.datesold}</Table.Cell>
+              <Table.Cell>{dateFormat(s.datesold)}</Table.Cell>
               <Table.Cell>
               
               <Button color = 'yellow' onClick={() => fetchsales(s.id, s.name, s.address)}>Edit</Button>
