@@ -1,18 +1,18 @@
 import React, { useState} from 'react'
 import { Button,Table,} from 'semantic-ui-react'
-import EditCustomerModal from './EditCustomerModal'
-import DeleteCustomerModal from './DeleteCustomerModal'
+import EditStoreModal from './EditStoreModal'
+import DeleteStoreModal from './DeleteStoreModal'
 
-const CustomersContent = (props) => {
-const {customers, loading, fetchData} = props;
+const StoresContent = (props) => {
+const {stores, loading, fetchData} = props;
 const [openEditModal, setOpenEditModal] = useState(false);
 const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-const [cid, setcid] = useState([])
-const [cname, setcname] = useState([])
-const [caddress, setcaddress] = useState([])
+const [stid, setstid] = useState([])
+const [stname, setstname] = useState([])
+const [staddress, setstaddress] = useState([])
 
-console.log(customers)
+
 const toggleEdit = () =>{
   setOpenEditModal(!openEditModal)
   //console.log("modal: " + openCreateModal)
@@ -23,18 +23,18 @@ const toggleDelete = () =>{
   //console.log("modal: " + openCreateModal)
 }
 
-const fetchCustomers = async (id, cname, caddress) => {
+const fetchStores = async (id, stname, staddress) => {
   console.log("edit")
-  setcid(id)
-  setcname(cname)
-  setcaddress(caddress)
+  setstid(id)
+  setstname(stname)
+  setstaddress(staddress)
   toggleEdit()
   
 }
 
-const deleteCustomer = (id) =>{
+const deleteStore = (id) =>{
   console.log("delete")
-  setcid(id)
+  setstid(id)
   toggleDelete()
 }
 
@@ -56,17 +56,17 @@ const deleteCustomer = (id) =>{
           </Table.Header>
 
           <Table.Body>
-          {customers.map((c)=>{
+          {stores.map((st)=>{
             return (
             <Table.Row>
-              <Table.Cell>{c.name}</Table.Cell>
-              <Table.Cell>{c.address}</Table.Cell>
+              <Table.Cell>{st.name}</Table.Cell>
+              <Table.Cell>{st.address}</Table.Cell>
               <Table.Cell>
               
-              <Button color = 'yellow' onClick={() => fetchCustomers(c.id, c.name, c.address)}>Edit</Button>
-              <EditCustomerModal open={openEditModal} toggleEdit={toggleEdit} cid={cid} cname={cname} caddress={caddress} fetchData={fetchData}/>
-              <Button color = 'red' onClick={() => deleteCustomer(c.id)}>Delete</Button>
-              <DeleteCustomerModal open={openDeleteModal} toggleDelete={toggleDelete} cid={cid} fetchData={fetchData}/>
+              <Button color = 'yellow' onClick={() => fetchStores(st.id, st.name, st.address)}>Edit</Button>
+              <EditStoreModal open={openEditModal} toggleEdit={toggleEdit} stid={stid} stname={stname} staddress={staddress} fetchData={fetchData}/>
+              <Button color = 'red' onClick={() => deleteStore(st.id)}>Delete</Button>
+              <DeleteStoreModal open={openDeleteModal} toggleDelete={toggleDelete} stid={stid} fetchData={fetchData}/>
               </Table.Cell>
               
               
@@ -88,4 +88,4 @@ const deleteCustomer = (id) =>{
     );
 }
 
-export default CustomersContent;
+export default StoresContent;

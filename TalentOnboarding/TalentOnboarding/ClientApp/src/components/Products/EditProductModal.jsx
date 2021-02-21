@@ -34,7 +34,7 @@ const editProduct = () => {
     console.log("edit")
     console.log(newName + " " + newPrice + " " + pid)
     axios
-      .put(`/Products/PutProduct/${pid}`, {
+      .put(`/Products/PutProductS/${pid}`, {
         id: pid,
         name: newName,
         price: newPrice,

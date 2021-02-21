@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Header, Image, Modal, Form } from 'semantic-ui-react'
+import { Button,Modal,} from 'semantic-ui-react'
 import axios from 'axios'
 //import { FetchData } from '../FetchData';
 
 
-const DeleteProductModal = (props) => {
-const {open, toggleDelete, pid, fetchData } = props;
+const DeleteStoreModal = (props) => {
+const {open, toggleDelete, stid, fetchData } = props;
 
-const deleteProduct = () =>{
-  //console.log("del " + pid)
+const deleteStore = () =>{
+  //console.log("del " + id)
   axios
-    .delete(`/Products/DeleteProducts/${pid}`)
+    .delete(`/Stores/DeleteStores/${stid}`)
     .then((res) => {
       console.log(res);
       fetchData();
@@ -31,7 +31,7 @@ const deleteProduct = () =>{
     <Modal
       open={open}
     >
-      <Modal.Header>Delete Product</Modal.Header>
+      <Modal.Header>Delete Store</Modal.Header>
       <Modal.Content>
         <h3>Are you sure?</h3>
       </Modal.Content>
@@ -40,10 +40,10 @@ const deleteProduct = () =>{
           Cancel
         </Button>
         <Button 
-          content="Delete Product"
+          content="Delete Store"
           labelPosition='right'
-          onClick={() => deleteProduct()}
-          negative
+          onClick={() => deleteStore()}
+          positive
 
         />
       </Modal.Actions>
@@ -51,4 +51,4 @@ const deleteProduct = () =>{
   )
 }
 
-export default DeleteProductModal;
+export default DeleteStoreModal;
