@@ -14,12 +14,11 @@ const [storeId, setStoreId] = useState();
 const [salesDate, setSalesDate] = useState();
 
   useEffect(() => {
-    // 
-    // console.log("date: " + salesDate)
+    // console.log(name)
+
   }, [])
 
   const setNewCust = (e) =>{
-    setDate()
     setCustId(e.target.value)
     console.log(custId)
   }
@@ -34,22 +33,11 @@ const [salesDate, setSalesDate] = useState();
   
 
   const getCurrentDate = () =>{
-    // setSalesDate(new Date())
     const current = new Date();
-    
-    const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
-    // setSalesDate(date)
+    // setSalesDate(current)
+    const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`
+   
     return date
-  }
-
-  const setDate = () =>{
-    
-
-    setSalesDate(new Date())
-
-    console.log("date: " + salesDate)
-
-
   }
 
   const test = (e)=>{
@@ -59,17 +47,15 @@ const [salesDate, setSalesDate] = useState();
  
 
   const createSales = () => {
-    
+    setSalesDate(getCurrentDate())
     if(!custId || !prodId || !storeId){
       alert("Fields detected as empty")
     }
     else{
-      
       console.log("cust: " + custId)
       console.log("prod: " + prodId)
       console.log("store: " + storeId)
       console.log("date: " + salesDate)
-      
       // console.log("!!: " + customers[0].id)
 
       axios
@@ -95,7 +81,7 @@ const [salesDate, setSalesDate] = useState();
     <Modal
       open={open}
     >
-      <Modal.Header>Create New Sale</Modal.Header>
+      <Modal.Header>Create New Sales</Modal.Header>
       <Modal.Content>
           <Form>
           <label><h3>Current Date: </h3> {getCurrentDate()}</label>
@@ -132,7 +118,7 @@ const [salesDate, setSalesDate] = useState();
           Cancel
         </Button>
         <Button
-          content="Create New Sale"
+          content="Create New Sales"
           labelPosition='right'
           icon='checkmark'
           onClick={() => createSales()}

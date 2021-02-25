@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import { Button,Table,} from 'semantic-ui-react'
 import NumberFormat from 'react-number-format'
 // import EditStoreModal from './EditStoreModal'
-// import DeleteStoreModal from './DeleteStoreModal'
+import DeleteSalesModal from './DeleteSalesModal'
 
 const SalesContent = (props) => {
 const {sales,customers, products, stores, loading, fetchData} = props;
@@ -112,7 +112,7 @@ const dateFormat = (date) =>{
               <Button color = 'yellow' onClick={() => fetchsales(s.id, s.name, s.address)}>Edit</Button>
               {/* <EditStoreModal open={openEditModal} toggleEdit={toggleEdit} sid={sid} sname={sname} staddress={staddress} fetchData={fetchData}/> */}
               <Button color = 'red' onClick={() => deleteSales(s.id)}>Delete</Button>
-              {/* <DeleteStoreModal open={openDeleteModal} toggleDelete={toggleDelete} sid={sid} fetchData={fetchData}/> */}
+              <DeleteSalesModal open={openDeleteModal} toggleDelete={toggleDelete} sid={sid} fetchData={fetchData}/>
               </Table.Cell>
               
               

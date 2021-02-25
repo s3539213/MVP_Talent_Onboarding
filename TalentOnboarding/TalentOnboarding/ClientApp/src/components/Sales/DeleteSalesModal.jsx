@@ -4,13 +4,13 @@ import axios from 'axios'
 //import { FetchData } from '../FetchData';
 
 
-const DeleteCustomerModal = (props) => {
-const {open, toggleDelete, cid, fetchData } = props;
+const DeleteSaleModal = (props) => {
+const {open, toggleDelete, sid, fetchData } = props;
 
-const deleteCustomer = (id) =>{
+const deleteSale = (id) =>{
   //console.log("del " + id)
   axios
-    .delete(`/Customers/DeleteCustomers/${id}`)
+    .delete(`/Sales/DeleteSales/${id}`)
     .then((res) => {
       console.log(res);
       fetchData();
@@ -31,7 +31,7 @@ const deleteCustomer = (id) =>{
     <Modal
       open={open}
     >
-      <Modal.Header>Delete Customer</Modal.Header>
+      <Modal.Header>Delete Sale</Modal.Header>
       <Modal.Content>
         <h3>Are you sure?</h3>
       </Modal.Content>
@@ -40,9 +40,9 @@ const deleteCustomer = (id) =>{
           Cancel
         </Button>
         <Button 
-          content="Delete Customer"
+          content="Delete Sale"
           labelPosition='right'
-          onClick={() => deleteCustomer(cid)}
+          onClick={() => deleteSale(sid)}
           positive
 
         />
@@ -51,4 +51,4 @@ const deleteCustomer = (id) =>{
   )
 }
 
-export default DeleteCustomerModal;
+export default DeleteSaleModal;
