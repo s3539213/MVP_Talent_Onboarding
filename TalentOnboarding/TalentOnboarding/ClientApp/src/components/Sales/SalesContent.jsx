@@ -4,6 +4,8 @@ import NumberFormat from 'react-number-format'
 // import EditStoreModal from './EditStoreModal'
 import DeleteSalesModal from './DeleteSalesModal'
 
+
+
 const SalesContent = (props) => {
 const {sales,customers, products, stores, loading, fetchData} = props;
 const [openEditModal, setOpenEditModal] = useState(false);
@@ -104,6 +106,7 @@ const dateFormat = (date) =>{
             <Table.Row>
               
               <Table.Cell>{getCustName(s.customerid)}</Table.Cell>
+             
               <Table.Cell>{getProd(s.productid)}</Table.Cell>
               <Table.Cell>{getStore(s.storeid)}</Table.Cell>
               <Table.Cell>{dateFormat(s.datesold)}</Table.Cell>

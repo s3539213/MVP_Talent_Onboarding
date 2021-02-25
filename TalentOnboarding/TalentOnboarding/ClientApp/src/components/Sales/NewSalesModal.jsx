@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Modal, Form, Select } from 'semantic-ui-react'
-
+import { Button, Modal, Form, Dropdown, Select } from 'semantic-ui-react'
+import DropOptions from './DropOptions'
 import axios from 'axios'
 
 
@@ -13,22 +13,28 @@ const [prodId, setProdId] = useState();
 const [storeId, setStoreId] = useState();
 const [salesDate, setSalesDate] = useState();
 
+
+
   useEffect(() => {
     // 
     // console.log("date: " + salesDate)
   }, [])
 
-  const setNewCust = (e) =>{
+  const setOptions = (obj) => {return obj.map(x => ({key:x.id, value:x.id, text: x.name}))}
+
+  const setNewCust = (e, data) =>{
     setDate()
-    setCustId(e.target.value)
+    setCustId(data.value)
     console.log(custId)
   }
-  const setNewProd = (e) =>{
-    setProdId(e.target.value)
+  const setNewProd = (e, data) =>{
+  
+    setProdId(data.value)
+    console.log(prodId)
     
   }
-  const setNewStore = (e) =>{
-    setStoreId(e.target.value)
+  const setNewStore = (e, data) =>{
+    setStoreId(data.value)
     // console.log(custId)
   }
   
@@ -42,18 +48,10 @@ const [salesDate, setSalesDate] = useState();
     return date
   }
 
-  const setDate = () =>{
-    
+  const setDate = () =>{setSalesDate(new Date())}
 
-    setSalesDate(new Date())
-
-    console.log("date: " + salesDate)
-
-
-  }
-
-  const test = (e)=>{
-    console.log(e.target.value);
+  const test = (e, data)=>{
+    console.log(data.value);
   }
 
  
@@ -81,6 +79,9 @@ const [salesDate, setSalesDate] = useState();
         })
         .then((res) => {
           console.log(res);
+          setCustId(null)
+          setProdId(null)
+          setStoreId(null)
           fetchData();
           toggleModal();
         })
@@ -102,27 +103,15 @@ const [salesDate, setSalesDate] = useState();
             <Form.Field>
               
               <label>Customer:</label>
-              <select onChange={setNewCust} placeholder= "DD">
-              {customers.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder="Select Customer" defaultValue="" selection fluid options={setOptions(customers)} onChange={setNewCust} value={custId}/>
             </Form.Field>
             <Form.Field>
               <label>Product:</label>
-              <select onChange={setNewProd} defaultValue= "">
-              {products.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder="Select Product" selection fluid options={setOptions(products)} onChange={setNewProd} value={prodId}/>
             </Form.Field>
             <Form.Field>
               <label>Store:</label>
-              <select onChange={setNewStore} defaultValue= "">
-              {stores.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder="Select Customer" selection fluid options={setOptions(stores)} onChange={setNewStore} value={storeId}/>
             </Form.Field>
 
         </Form> 

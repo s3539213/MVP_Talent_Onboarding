@@ -1,33 +1,30 @@
 import React, { useState } from 'react'
 import { Dropdown } from 'semantic-ui-react'
 
-const dropOptions = (props) => {
+const DropOptions = (props) => {
     const {type, obj} = props;
-    const [typeText, setTypeText] = useState();
+    // const [typeText, setTypeText] = useState();
 
-    const getTypeText = () =>{
+    const setOptions = obj.map(x => ({key: x.id,value: x.id,text: x.name}))
 
-        if(type == "customers"){setTypeText("Customer")}
-        else if (type == "products"){setTypeText("Product")}
-        else{setTypeText("Store")}
-
-        return "Select " + typeText
-    }
-    const setOptions = () =>{
-        obj.map((x) => [{key: x.id, value:x.id, text:x.name}] )
-
-    }
+    
 
 
-    // return(
-    //     <Dropdown
-    //         placeholder={getTypeText}
-
-    // )
+    return(
+        <div>
+        
+        <Dropdown
+            placeholder={type}
+            fluid
+            selection
+            options = {setOptions}
+        />
+        </div>
+    )
 
 }
 
 
 
 
-export default dropOptions;
+export default DropOptions;
