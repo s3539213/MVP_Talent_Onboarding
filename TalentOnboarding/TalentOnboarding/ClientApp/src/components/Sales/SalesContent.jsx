@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { Button,Table,} from 'semantic-ui-react'
 import NumberFormat from 'react-number-format'
-// import EditStoreModal from './EditStoreModal'
+import EditSalesModal from './EditSalesModal'
 import DeleteSalesModal from './DeleteSalesModal'
 
 
@@ -11,9 +11,11 @@ const {sales,customers, products, stores, loading, fetchData} = props;
 const [openEditModal, setOpenEditModal] = useState(false);
 const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-const [sid, setsid] = useState([])
-const [sname, setsname] = useState([])
-const [saddress, setstaddress] = useState([])
+const [sid, setSid] = useState([])
+const [cid, setCid] = useState([])
+const [pid, setPid] = useState([])
+const [stid, setStid] = useState([])
+
 
 console.log("sales: " + sales.data)
 const toggleEdit = () =>{
@@ -59,18 +61,19 @@ const getStore = (id) =>{
 }
 
 
-const fetchsales = async (id, sname, staddress) => {
+const fetchsales = async (id, cid, pid, stid) => {
   console.log("edit")
-  setsid(id)
-  setsname(sname)
-  setstaddress(staddress)
+  setSid(id)
+  setCid(cid)
+  setPid(pid)
+  setStid(stid)
   toggleEdit()
   
 }
 
 const deleteSales = (id) =>{
   console.log("delete")
-  setsid(id)
+  setSid(id)
   toggleDelete()
 }
 
@@ -112,8 +115,8 @@ const dateFormat = (date) =>{
               <Table.Cell>{dateFormat(s.datesold)}</Table.Cell>
               <Table.Cell>
               
-              <Button color = 'yellow' onClick={() => fetchsales(s.id, s.name, s.address)}>Edit</Button>
-              {/* <EditStoreModal open={openEditModal} toggleEdit={toggleEdit} sid={sid} sname={sname} staddress={staddress} fetchData={fetchData}/> */}
+              <Button color = 'yellow' onClick={() => fetchsales(s.id, s.customerid, s.productid, s.storeid)}>Edit</Button>
+              <EditSalesModal open={openEditModal} toggleEdit={toggleEdit} customers={customers} products={products} stores={stores} sid={s.id} cid={s.customerid} pid={s.productid} stid={s.storeid} sdate={dateFormat(s.datesold)} fetchData={fetchData}/>
               <Button color = 'red' onClick={() => deleteSales(s.id)}>Delete</Button>
               <DeleteSalesModal open={openDeleteModal} toggleDelete={toggleDelete} sid={sid} fetchData={fetchData}/>
               </Table.Cell>

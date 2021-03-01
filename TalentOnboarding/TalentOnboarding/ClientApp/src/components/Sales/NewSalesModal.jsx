@@ -42,8 +42,7 @@ const [salesDate, setSalesDate] = useState();
   const getCurrentDate = () =>{
     // setSalesDate(new Date())
     const current = new Date();
-    
-    const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
+    const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`
     // setSalesDate(date)
     return date
   }

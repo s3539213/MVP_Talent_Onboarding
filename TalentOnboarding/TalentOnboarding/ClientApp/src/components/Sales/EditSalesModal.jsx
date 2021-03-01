@@ -1,129 +1,102 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Label, Input, Modal, Form } from 'semantic-ui-react'
+import { Button, Dropdown, Input, Modal, Form } from 'semantic-ui-react'
 import NumberFormat from 'react-number-format'
 import axios from 'axios'
 //import { FetchData } from '../FetchData';
 
 
 const EditSalesModal = (props) => {
-const {open, toggleEdit, sid, cid, pid, stid, fetchData } = props;
+  const {open, toggleEdit,customers,products, stores, sid, cid, pid, stid, sdate, fetchData } = props;
 
-const [custId, setCustId] = useState();
-const [prodId, setProdId] = useState();
-const [storeId, setStoreId] = useState();
-const [salesDate, setSalesDate] = useState();
-const checkInput = () =>{
-  
- /*if no changes on both field have been made:
-    setNewName = pname AND setNewPrice = pprice
+  const [custId, setCustId] = useState();
+  const [prodId, setProdId] = useState();
+  const [storeId, setStoreId] = useState();
+  const [salesDate, setSalesDate] = useState();
 
-    if only 1 field has beed changed:
-      setNewName = pname OR setNewPrice = pprice
+  const setOptions = (obj) => {return obj.map(x => ({key:x.id, value:x.id, text: x.name}))}
+  const setNewCust = (e, data) =>{setCustId(data.value)}
+  const setNewProd = (e, data) =>{setProdId(data.value)}
+  const setNewStore = (e, data) =>{setStoreId(data.value)}
 
-    if both fields are emptity: 
-    setNewName = pname AND setNewPrice = pprice
+  const getName = (id, obj) =>{
+    let itemName = ""
+    obj.map((x)=> {
+      if(x.id === id){
+        itemName = x.name
+      }
+    })
+    return itemName
 
- */
-} 
-
-const editSales = () => {
-  setSalesDate(getCurrentDate())
-  if(!custId || !prodId || !storeId){
-    alert("Fields detected as empty")
   }
-  else{
-    console.log("cust: " + custId)
-    console.log("prod: " + prodId)
-    console.log("store: " + storeId)
-    console.log("date: " + salesDate)
-    // console.log("!!: " + customers[0].id)
 
-    axios
-      .post('/Sales/PostSales', {
-        customerid: custId,
-        productid: prodId,
-        storeid: storeId,
-        datesold: ""+ getCurrentDate()
-      })
-      .then((res) => {
-        console.log(res);
-        fetchData();
-        toggleEdit();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const editSales = () => {
+    // setSalesDate(getCurrentDate())
+    if(!custId || !prodId || !storeId){
+      alert("Fields detected as empty")
+    }
+    else{
+      console.log("id: " + sid)
+      console.log("cust: " + custId)
+      console.log("prod: " + prodId)
+      console.log("store: " + storeId)
+      console.log("date: " + sdate)
+      // console.log("date: " + salesDate)
+      // console.log("!!: " + customers[0].id)
+
+      axios
+        .put(`/Sales/PutSales/${sid}`, {
+          id: sid,
+          customerid: custId,
+          productid: prodId,
+          storeid: storeId,
+          datesold: sdate
+        })
+        .then((res) => {
+          console.log(res);
+          // setCustId(null)
+          // setProdId(null)
+          // setStoreId(null)
+          fetchData();
+          toggleEdit();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
-}
-
-const setNewCust = (e) =>{
-  setCustId(e.target.value)
-  console.log(custId)
-}
-const setNewProd = (e) =>{
-  setProdId(e.target.value)
-  
-}
-const setNewStore = (e) =>{
-  setStoreId(e.target.value)
-  // console.log(custId)
-}
-
-
-  useEffect(() => {
-    
-  }, [])
-
- 
   return (
     <Modal
       open={open}
     >
       <Modal.Header>Edit Sale</Modal.Header>
       <Modal.Content>
-          <Form>
-          <label><h3>Current Date: </h3> {getCurrentDate()}</label>
-            <Form.Field>
-              
+        <Form>
+          <label><h3>Sales Date: </h3> {sdate}</label>
+            <Form.Field>          
               <label>Customer:</label>
-              <select onChange={setNewCust} placeholder= "DD">
-              {customers.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder={getName(cid, customers)}  selection fluid options={setOptions(customers)} onChange={setNewCust} value={custId}/>
             </Form.Field>
             <Form.Field>
               <label>Product:</label>
-              <select onChange={setNewProd} defaultValue= "">
-              {products.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder={getName(pid, products)} selection fluid options={setOptions(products)} onChange={setNewProd} value={prodId}/>
             </Form.Field>
             <Form.Field>
               <label>Store:</label>
-              <select onChange={setNewStore} defaultValue= "">
-              {stores.map((x) =>{
-                return(<option value ={x.id}>{x.name}</option>)
-              })}
-              </select>
+              <Dropdown placeholder={getName(stid, stores)}  selection fluid options={setOptions(stores)} onChange={setNewStore} value={storeId}/>
             </Form.Field>
-
         </Form> 
-      </Modal.Content>
-      <Modal.Actions>
-        <Button color='black' onClick={() => toggleEdit()}>
-          Cancel
-        </Button>
-        <Button
-          content="Edit Sale"
-          labelPosition='right'
-          icon='checkmark'
-          onClick={() => editSales()}
-          positive
-        />
-      </Modal.Actions>
-    </Modal>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color='black' onClick={() => toggleEdit()}>Cancel</Button>
+          <Button
+            content="Edit Sale"
+            labelPosition='right'
+            icon='checkmark'
+            onClick={() => editSales()}
+            positive
+          />
+        </Modal.Actions>
+      </Modal>
   )
 }
 
