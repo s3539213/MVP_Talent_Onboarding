@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { Button, Modal, Form } from 'semantic-ui-react'
 
 import axios from 'axios'
@@ -9,15 +9,6 @@ const NewStoreModal = (props) => {
 const { open, toggleModal, fetchData } = props;
 const [name, setname] = useState();
 const [address, setaddress] = useState();
-
-  useEffect(() => {
-    console.log(name)
-
-  }, [name])
-
-  const test = (e)=>{
-    console.log(e.target.value);
-  }
 
   const createStore = () => {
     if(!name || !address){

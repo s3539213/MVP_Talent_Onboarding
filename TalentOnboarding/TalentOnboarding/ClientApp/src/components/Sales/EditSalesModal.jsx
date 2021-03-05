@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import { Button, Dropdown, Input, Modal, Form } from 'semantic-ui-react'
-import NumberFormat from 'react-number-format'
+import React, {useState} from 'react'
+import { Button, Dropdown, Modal, Form } from 'semantic-ui-react'
+
 import axios from 'axios'
 //import { FetchData } from '../FetchData';
 
@@ -11,7 +11,7 @@ const EditSalesModal = (props) => {
   const [custId, setCustId] = useState();
   const [prodId, setProdId] = useState();
   const [storeId, setStoreId] = useState();
-  const [salesDate, setSalesDate] = useState();
+
 
   const setOptions = (obj) => {return obj.map(x => ({key:x.id, value:x.id, text: x.name}))}
   const setNewCust = (e, data) =>{setCustId(data.value)}
@@ -20,7 +20,7 @@ const EditSalesModal = (props) => {
 
   const getName = (id, obj) =>{
     let itemName = ""
-    obj.map((x)=> {
+    obj.map(x => {
       if(x.id === id){
         itemName = x.name
       }

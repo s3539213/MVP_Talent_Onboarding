@@ -14,10 +14,6 @@ const [address, setaddress] = useState();
 
   }, [name])
 
-  const test = (e)=>{
-    console.log(e.target.value);
-  }
-
   const createCustomer = () => {
     if(!name || !address){
       alert ("Please complete all fields")

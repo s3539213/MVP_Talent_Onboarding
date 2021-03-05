@@ -34,7 +34,7 @@ const CstmPagination = ({ itemsPerPage, totalitems, paginate, type  }) => {
     //   lastItem={null}
     //   siblingRange={2}
     //   totalPages={Math.ceil(totalitems / itemsPerPage)}
-    //   onPageChange = {this.onChange}
+    //   onPageChange = {() => paginate(number)}
 
     // />
 

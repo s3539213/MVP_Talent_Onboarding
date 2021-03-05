@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { Button, Label, Input, Modal, Form } from 'semantic-ui-react'
 import NumberFormat from 'react-number-format'
 import axios from 'axios'
@@ -10,20 +10,6 @@ const {open, toggleEdit, pid, pname, pprice,fetchData } = props;
 
 const [newName, setNewName] = useState();
 const [newPrice, setNewPrice] = useState();
-
-const checkInput = () =>{
-  
- /*if no changes on both field have been made:
-    setNewName = pname AND setNewPrice = pprice
-
-    if only 1 field has beed changed:
-      setNewName = pname OR setNewPrice = pprice
-
-    if both fields are emptity: 
-    setNewName = pname AND setNewPrice = pprice
-
- */
-} 
 
 const editProduct = () => {
   
@@ -49,22 +35,10 @@ const editProduct = () => {
         });
   }
 }
-  const test = (e) =>{
-    console.log(e.target.value);
-  }
-  const setName = (e) =>{
-    setNewName(e.target.value)
-  }
-  const setPrice = (e) =>{
-    setNewPrice(e.target.value)
-  }
+  const test = (e) =>{console.log(e.target.value);}
+  const setName = (e) =>{setNewName(e.target.value)}
+  const setPrice = (e) =>{setNewPrice(e.target.value)}
 
-
-  useEffect(() => {
-    
-  }, [])
-
- 
   return (
     <Modal
       open={open}
@@ -79,7 +53,7 @@ const editProduct = () => {
             <Form.Field>
             <Input labelPosition='right' type='text' placeholder='Amount'>
               <Label basic>$</Label>
-              {/* <input defaultValue={pprice} onChange ={(e) => setInputPrice(e.target.value)} onBlur={(e) => setNewPrice(e.target.value) }/> */}
+             
               <NumberFormat thousandSeparator={true} defaultValue={pprice} decimalSeparators={true} decimalScale={2} fixedDecimalScale={true} onChange ={test} onBlur={setPrice}/>
               <Label></Label>
             </Input>
