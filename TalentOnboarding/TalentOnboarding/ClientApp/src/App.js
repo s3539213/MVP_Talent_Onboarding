@@ -12,7 +12,7 @@ import  Product  from './components/Products/Products';
 import  Store  from './components/Stores/Stores';
 import  Sales  from './components/Sales/Sales';
 
-import test from './components/Test';
+// import test from './components/Test';
 import './custom.css'
 
 export default class App extends Component {
@@ -28,7 +28,7 @@ export default class App extends Component {
         <Route path='/sales' component={Sales}/>
 
 
-        <Route path='/test' component={test} />
+        {/* <Route path='/test' component={test} /> */}
       </Layout>
     );
   }

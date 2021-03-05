@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Button,  Modal, } from 'semantic-ui-react'
 import axios from 'axios'
 //import { FetchData } from '../FetchData';
@@ -22,11 +22,6 @@ const deleteCustomer = (id) =>{
 
 }
 
-  useEffect(() => {
-    
-  }, [])
-
- 
   return (
     <Modal
       open={open}
