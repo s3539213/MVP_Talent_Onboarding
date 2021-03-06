@@ -10,7 +10,7 @@ const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [customersPerPage] = useState(10);
+  const [customersPerPage] = useState(3);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   
   useEffect(() => {

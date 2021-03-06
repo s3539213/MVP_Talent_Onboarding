@@ -12,7 +12,7 @@ const [cid, setcid] = useState([])
 const [cname, setcname] = useState([])
 const [caddress, setcaddress] = useState([])
 
-console.log(customers)
+
 const toggleEdit = () =>{
   setOpenEditModal(!openEditModal)
   //console.log("modal: " + openCreateModal)
@@ -24,7 +24,7 @@ const toggleDelete = () =>{
 }
 
 const fetchCustomers = async (id, cname, caddress) => {
-  console.log("edit")
+  // console.log("edit")
   setcid(id)
   setcname(cname)
   setcaddress(caddress)
@@ -33,7 +33,7 @@ const fetchCustomers = async (id, cname, caddress) => {
 }
 
 const deleteCustomer = (id) =>{
-  console.log("delete")
+  // console.log("delete")
   setcid(id)
   toggleDelete()
 }
@@ -68,9 +68,7 @@ const deleteCustomer = (id) =>{
               <Button color = 'red' onClick={() => deleteCustomer(c.id)}>Delete</Button>
               <DeleteCustomerModal open={openDeleteModal} toggleDelete={toggleDelete} cid={cid} fetchData={fetchData}/>
               </Table.Cell>
-              
-              
-              
+ 
             </Table.Row>
               )
             })}  

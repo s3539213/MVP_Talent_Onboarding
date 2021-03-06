@@ -7,10 +7,10 @@ import axios from 'axios'
 const DeleteCustomerModal = (props) => {
 const {open, toggleDelete, cid, fetchData } = props;
 
-const deleteCustomer = (id) =>{
+const deleteCustomer = () =>{
   //console.log("del " + id)
   axios
-    .delete(`/Customers/DeleteCustomers/${id}`)
+    .delete(`/Customers/DeleteCustomers/${cid}`)
     .then((res) => {
       console.log(res);
       fetchData();
@@ -31,16 +31,8 @@ const deleteCustomer = (id) =>{
         <h3>Are you sure?</h3>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => toggleDelete()}>
-          Cancel
-        </Button>
-        <Button 
-          content="Delete Customer"
-          labelPosition='right'
-          onClick={() => deleteCustomer(cid)}
-          positive
-
-        />
+        <Button color='black' onClick={() => toggleDelete()}>Cancel</Button>
+        <Button color = 'red' onClick={() => deleteCustomer()}>Delete Customer</Button>
       </Modal.Actions>
     </Modal>
   )

@@ -9,8 +9,14 @@ const CstmPagination = ({ itemsPerPage, totalitems, paginate, type  }) => {
     pageNumbers.push(i);
   }
 
-   const onChange = (e, ) =>{
-
+   const handleChange = (e, ) =>{
+    pageNumbers.map(number => (
+            <li key={number} className='page-item'>
+              <a onClick={() => paginate(number)} href={getHrefType} className='page-link'>
+                {number}
+              </a>
+            </li>
+          ))
 
   }
   const getHrefType = () => {
@@ -24,7 +30,8 @@ const CstmPagination = ({ itemsPerPage, totalitems, paginate, type  }) => {
   }
 
   return (
-    //sematic ver.
+    
+    // sematic ver.
     // <Pagination 
     //   boundaryRange = {0}
     //   defaultActivePage = {1}

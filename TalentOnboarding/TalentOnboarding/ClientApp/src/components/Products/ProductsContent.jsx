@@ -29,7 +29,7 @@ const toggleDelete = () =>{
 }
 
 const fetchProducts = async (id, pname, pprice) => {
-  console.log(pprice)
+  // console.log(pprice)
   setpid(id)
   setpname(pname)
   setpprice(pprice)
@@ -38,7 +38,7 @@ const fetchProducts = async (id, pname, pprice) => {
 }
 
 const deleteProduct = (id, name) =>{
-  console.log("delete")
+  // console.log("delete")
   setpid(id)
   setpname(name)
   toggleDelete()
