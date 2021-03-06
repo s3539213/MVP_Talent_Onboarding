@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { Button,Table,} from 'semantic-ui-react'
-import NumberFormat from 'react-number-format'
+
 import EditSalesModal from './EditSalesModal'
 import DeleteSalesModal from './DeleteSalesModal'
 

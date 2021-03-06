@@ -33,13 +33,7 @@ const deleteProduct = () =>{
         <Button color='black' onClick={() => toggleDelete()}>
           Cancel
         </Button>
-        <Button 
-          content="Delete Product"
-          labelPosition='right'
-          onClick={() => deleteProduct()}
-          negative
-
-        />
+        <Button color = 'red' onClick={() => deleteProduct()}>Delete Product</Button>
       </Modal.Actions>
     </Modal>
   )

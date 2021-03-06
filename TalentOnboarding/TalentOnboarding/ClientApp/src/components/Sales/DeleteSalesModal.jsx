@@ -7,10 +7,10 @@ import axios from 'axios'
 const DeleteSaleModal = (props) => {
 const {open, toggleDelete, sid, fetchData } = props;
 
-const deleteSale = (id) =>{
+const deleteSale = () =>{
   //console.log("del " + id)
   axios
-    .delete(`/Sales/DeleteSales/${id}`)
+    .delete(`/Sales/DeleteSales/${sid}`)
     .then((res) => {
       console.log(res);
       fetchData();
@@ -32,16 +32,8 @@ const deleteSale = (id) =>{
         <h3>Are you sure?</h3>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => toggleDelete()}>
-          Cancel
-        </Button>
-        <Button 
-          content="Delete Sale"
-          labelPosition='right'
-          onClick={() => deleteSale(sid)}
-          positive
-
-        />
+        <Button color='black' onClick={() => toggleDelete()}>Cancel</Button>
+        <Button color = 'red' onClick={() => deleteSale()}>Delete Sale</Button>
       </Modal.Actions>
     </Modal>
   )

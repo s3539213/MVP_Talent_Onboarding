@@ -31,16 +31,8 @@ const deleteStore = () =>{
         <h3>Are you sure?</h3>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => toggleDelete()}>
-          Cancel
-        </Button>
-        <Button 
-          content="Delete Store"
-          labelPosition='right'
-          onClick={() => deleteStore()}
-          positive
-
-        />
+        <Button color='black' onClick={() => toggleDelete()}>Cancel</Button>
+        <Button color = 'red' onClick={() => deleteStore()}>Delete Store</Button>
       </Modal.Actions>
     </Modal>
   )
